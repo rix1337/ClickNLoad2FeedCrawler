@@ -17,14 +17,14 @@ with open('requirements.txt') as f:
 
 setuptools.setup(
     name="cnl2rsscrawler",
-    version="0.0.2",
+    version="0.1.0",
     author="rix1337",
     author_email="",
     description="Intercept, decrypt and forward CnL to RSScrawler",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/rix1337/ClickNLoad2RSScrawler",
-    packages=setuptools.find_packages(),
+    packages=["cnl2rsscrawler"],
     include_package_data=True,
     install_requires=required,
     zip_safe=False,
@@ -35,7 +35,7 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'cnl2rsscrawler = cnl2rsscrawler:main',
+            'cnl2rsscrawler = cnl2rsscrawler.cnl2rsscrawler:main',
         ],
     },
 )
