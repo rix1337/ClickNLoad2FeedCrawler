@@ -18,7 +18,7 @@ Fängt Click'n'Load ab, entschlüsselt die Payload und übergibt diese dem RSScr
 ```cnl2rsscrawler --url=192.168.1.1:9090``` in der Konsole (Python muss im System-PATH hinterlegt sein)
 
 
-#### Startparameter
+#### Pflichtparameter
 
 | Parameter | Erläuterung |
 |---|---|

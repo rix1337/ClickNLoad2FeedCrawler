@@ -1,0 +1,5 @@
+# -*- coding: utf-8 -*-
+# ClickNLoad2RSScrawler
+# Projekt von https://github.com/rix1337
+
+docopt
