@@ -1,6 +1,10 @@
 # ClickNLoad2RSScrawler
 Fängt Click'n'Load ab, entschlüsselt die Payload und übergibt diese dem RSScrawler
 
+[![PyPI version](https://badge.fury.io/py/cnl2rsscrawler.svg)](https://badge.fury.io/py/cnl2rsscrawler)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/cnl2rsscrawler)](https://img.shields.io/pypi/dm/cnl2rsscrawler)
+[![Github Sponsorship](https://img.shields.io/badge/support-me-red.svg)](https://github.com/users/rix1337/sponsorship)
+
 ####  Voraussetzungen
 * Linux basierte Laufzeitumgebung (inkompatibel mit Windows)
 * [Python 3.8](https://www.python.org/downloads/) oder neuer
