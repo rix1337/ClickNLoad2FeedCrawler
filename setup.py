@@ -17,7 +17,7 @@ with open('requirements.txt') as f:
 
 setuptools.setup(
     name="cnl2rsscrawler",
-    version="0.0.1",
+    version="0.0.2",
     author="rix1337",
     author_email="",
     description="Intercept, decrypt and forward CnL to RSScrawler",
