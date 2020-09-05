@@ -96,7 +96,7 @@ class CNLHandler(http.server.BaseHTTPRequestHandler):
 
     @staticmethod
     def jdcheck():
-        return "jdownloader=true; var version='17461';"
+        return "jdownloader=true; var version='42707';"
 
     @staticmethod
     def crossdomain():
