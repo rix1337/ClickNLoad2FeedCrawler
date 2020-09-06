@@ -224,7 +224,7 @@ def main():
         print(u'Bitte mit --url=<RSSCRAWLER_URL> starten!')
         time.sleep(10)
         sys.exit(1)
-    httpd = http.server.HTTPServer(("localhost", 9666), CNLHandler)
+    httpd = http.server.HTTPServer(("0.0.0.0", 9666), CNLHandler)
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
