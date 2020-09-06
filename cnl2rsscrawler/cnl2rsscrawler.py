@@ -18,7 +18,10 @@ import base64
 import cgi
 import fnmatch
 import http.server
+import socket
 import subprocess
+import sys
+import time
 from io import StringIO
 
 import requests
@@ -196,7 +199,31 @@ def jk_eval(f_def):
     return call(js_cmd, ';'.join((f_def, f_call))).strip()
 
 
+def check_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        s.connect(('10.255.255.255', 0))
+        ip = s.getsockname()[0]
+    except:
+        ip = '127.0.0.1'
+    finally:
+        s.close()
+    return ip
+
+
 def main():
+    print(u"┌──────────────────────────────────────────────────┐")
+    print(u"  Click'n'Load2RSScrawler von RiX")
+    print(u"  https://github.com/rix1337/ClickNLoad2RSScrawler")
+    print(u"└──────────────────────────────────────────────────┘")
+    local_address = 'http://' + check_ip() + ':' + str(9666)
+    print(u"Click'n'Load ist verfügbar unter " + local_address)
+    arguments = docopt(__doc__, version='RSScrawler')
+    rsscrawler_url = "http://" + arguments['--url'].replace("http://", "")
+    if not rsscrawler_url:
+        print(u'Bitte mit --url=<RSSCRAWLER_URL> starten!')
+        time.sleep(10)
+        sys.exit(1)
     httpd = http.server.HTTPServer(("localhost", 9666), CNLHandler)
     try:
         httpd.serve_forever()

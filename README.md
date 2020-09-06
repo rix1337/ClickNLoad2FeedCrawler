@@ -1,5 +1,5 @@
-# ClickNLoad2RSScrawler
-ClickNLoad2RSScrawler fängt Click'n'Load ab, entschlüsselt die Payload und übergibt diese dem RSScrawler.
+# Click'n'Load2RSScrawler
+Click'n'Load2RSScrawler fängt Click'n'Load ab, entschlüsselt die Payload und übergibt diese dem RSScrawler.
 
 [![PyPI version](https://badge.fury.io/py/cnl2rsscrawler.svg)](https://badge.fury.io/py/cnl2rsscrawler)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/cnl2rsscrawler)](https://img.shields.io/pypi/dm/cnl2rsscrawler)
