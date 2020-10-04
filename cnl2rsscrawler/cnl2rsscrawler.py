@@ -50,6 +50,9 @@ class output:
 
 
 class CNLHandler(http.server.BaseHTTPRequestHandler):
+    http.server.BaseHTTPRequestHandler.server_version = "Click'n'Load2RSScrawler"
+    http.server.BaseHTTPRequestHandler.sys_version = ""
+
     def __init__(self, request, client_address, server):
         self.URL_MAPPING = [
             URLMap("/", get_fn=self.alive),
@@ -87,6 +90,7 @@ class CNLHandler(http.server.BaseHTTPRequestHandler):
             return
         try:
             self.send_response(200, "OK")
+            self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
             self.wfile.write(response_fn().encode())
         except Exception as e:
