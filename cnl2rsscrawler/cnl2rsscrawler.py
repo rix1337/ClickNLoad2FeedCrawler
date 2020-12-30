@@ -85,7 +85,9 @@ class CNLHandler(http.server.BaseHTTPRequestHandler):
         self.respond(response_fn)
 
     def respond(self, response_fn):
-        if response_fn is None:
+        if "/jdcheck.js?" in self.requestline and response_fn is None:
+            response_fn = self.jdcheck
+        elif response_fn is None:
             self.send_error(404, "Not Found")
             return
         try:
@@ -103,7 +105,7 @@ class CNLHandler(http.server.BaseHTTPRequestHandler):
 
     @staticmethod
     def jdcheck():
-        return "jdownloader=true; var version='42707';"
+        return "jdownloader=true; var version='43307';"
 
     @staticmethod
     def crossdomain():
@@ -145,6 +147,9 @@ def encode_base64(value):
 
 
 def format_package(name, urls, passwords=None):
+    if "/" in name:
+        name = name.replace("/", "")
+
     buf = StringIO()
 
     # Load RSScrawler base URL
