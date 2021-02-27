@@ -147,8 +147,12 @@ def encode_base64(value):
 
 
 def format_package(name, urls, passwords=None):
+    name = name.strip()
     if "/" in name:
         name = name.replace("/", "")
+
+    if " - " in name:
+        name = name.split(" - ")[0]
 
     buf = StringIO()
 

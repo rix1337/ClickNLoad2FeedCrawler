@@ -7,7 +7,7 @@ Click'n'Load2RSScrawler fängt Click'n'Load ab, entschlüsselt die Payload und �
 
 ####  Voraussetzungen
 * Linux basierte Laufzeitumgebung (inkompatibel mit Windows)
-* [Python 3.8](https://www.python.org/downloads/) oder neuer
+* [Python 3.9](https://www.python.org/downloads/) oder neuer
 * [pip](https://pip.pypa.io/en/stable/installing/)
 * [openssl](https://www.openssl.org/)
 * [Node.js](https://nodejs.org/)
