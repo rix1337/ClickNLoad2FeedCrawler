@@ -150,7 +150,8 @@ def format_package(name, urls, passwords=None):
     name = name.strip()
     if "/" in name:
         name = name.replace("/", "")
-
+    if "%20" in name:
+        name = name.replace("%20", "")
     if " - " in name:
         name = name.split(" - ")[0]
 
