@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# ClickNLoad2RSScrawler
+# ClickNLoad2FeedCrawler
 # Projekt von https://github.com/rix1337
 
 import setuptools
@@ -16,15 +16,15 @@ with open('requirements.txt') as f:
     required = f.read().splitlines()
 
 setuptools.setup(
-    name="cnl2rsscrawler",
-    version="1.0.1",
+    name="cnl2feedcrawler",
+    version="1.1.0",
     author="rix1337",
     author_email="",
-    description="Intercept, decrypt and forward CnL to RSScrawler",
+    description="Intercept, decrypt and forward CnL to FeedCrawler",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/rix1337/ClickNLoad2RSScrawler",
-    packages=["cnl2rsscrawler"],
+    url="https://github.com/rix1337/ClickNLoad2FeedCrawler",
+    packages=["cnl2feedcrawler"],
     include_package_data=True,
     install_requires=required,
     zip_safe=False,
@@ -35,7 +35,7 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'cnl2rsscrawler = cnl2rsscrawler.cnl2rsscrawler:main',
+            'cnl2feedcrawler = cnl2feedcrawler.cnl2feedcrawler:main',
         ],
     },
 )

@@ -1,8 +1,8 @@
-# Click'n'Load2RSScrawler
-Click'n'Load2RSScrawler f채ngt Click'n'Load ab, entschl체sselt die Payload und 체bergibt diese dem RSScrawler.
+# Click'n'Load2FeedCrawler
+Click'n'Load2FeedCrawler f채ngt Click'n'Load ab, entschl체sselt die Payload und 체bergibt diese dem FeedCrawler.
 
-[![PyPI version](https://badge.fury.io/py/cnl2rsscrawler.svg)](https://badge.fury.io/py/cnl2rsscrawler)
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/cnl2rsscrawler)](https://img.shields.io/pypi/dm/cnl2rsscrawler)
+[![PyPI version](https://badge.fury.io/py/cnl2feedcrawler.svg)](https://badge.fury.io/py/cnl2feedcrawler)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/cnl2feedcrawler)](https://img.shields.io/pypi/dm/cnl2feedcrawler)
 [![Github Sponsorship](https://img.shields.io/badge/support-me-red.svg)](https://github.com/users/rix1337/sponsorship)
 
 ####  Voraussetzungen
@@ -11,22 +11,22 @@ Click'n'Load2RSScrawler f채ngt Click'n'Load ab, entschl체sselt die Payload und �
 * [pip](https://pip.pypa.io/en/stable/installing/)
 * [openssl](https://www.openssl.org/)
 * [Node.js](https://nodejs.org/)
-* [RSScrawler 8](https://github.com/rix1337/RSScrawler) oder neuer
+* [FeedCrawler 8](https://github.com/rix1337/FeedCrawler) oder neuer
 
 #### Update
 
-```pip install -U cnl2rsscrawler```
+```pip install -U cnl2feedcrawler```
 
 #### Starten
 
-```cnl2rsscrawler --url=192.168.1.1:9090``` in der Konsole (Python muss im System-PATH hinterlegt sein)
+```cnl2feedcrawler --url=192.168.1.1:9090``` in der Konsole (Python muss im System-PATH hinterlegt sein)
 
 
 #### Pflichtparameter
 
 | Parameter | Erl채uterung |
 |---|---|
-| ```--url=<URL>``` | Die lokale URL des RSScrawlers - bspw. `192.168.1.1:9090`)
+| ```--url=<URL>``` | Die lokale URL des FeedCrawlers - bspw. `192.168.1.1:9090`)
 
 ***
 

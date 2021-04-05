@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
-# ClickNLoad2RSScrawler
+# ClickNLoad2FeedCrawler
 # Projekt von https://github.com/rix1337
 #
 # Enthält Code von https://github.com/drwilly/clicknload2text
 # Lizenz: https://github.com/drwilly/clicknload2text/blob/master/LICENSE
 
-"""RSScrawler.
+"""FeedCrawler.
 
 Usage:
-  cnl2rsscrawler.py [--url=<URL>]
+  cnl2feedcrawler.py [--url=<URL>]
 
 Options:
-  --url=<URL>    Your RSScrawler's base URL
+  --url=<URL>    Your FeedCrawler's base URL
 """
 
 import base64
@@ -50,7 +50,7 @@ class output:
 
 
 class CNLHandler(http.server.BaseHTTPRequestHandler):
-    http.server.BaseHTTPRequestHandler.server_version = "Click'n'Load2RSScrawler"
+    http.server.BaseHTTPRequestHandler.server_version = "Click'n'Load2FeedCrawler"
     http.server.BaseHTTPRequestHandler.sys_version = ""
 
     def __init__(self, request, client_address, server):
@@ -157,14 +157,14 @@ def format_package(name, urls, passwords=None):
 
     buf = StringIO()
 
-    # Load RSScrawler base URL
-    arguments = docopt(__doc__, version='RSScrawler')
-    rsscrawler_url = "http://" + arguments['--url'].replace("http://", "")
+    # Load FeedCrawler base URL
+    arguments = docopt(__doc__, version='FeedCrawler')
+    feedcrawler_url = "http://" + arguments['--url'].replace("http://", "")
 
-    # Create and send RSScrawler Payload
-    print("[RSScrawler Sponsors Helper Click'n'Load erfolgreich] - " + name)
+    # Create and send FeedCrawler Payload
+    print("[FeedCrawler Sponsors Helper Click'n'Load erfolgreich] - " + name)
     links = str(urls).replace(" ", "")
-    crawler = rsscrawler_url + '/sponsors_helper/to_download/'
+    crawler = feedcrawler_url + '/sponsors_helper/to_download/'
     payload = encode_base64(links + '|' + name + '|' + str(passwords))
     requests.get(crawler + payload)
 
@@ -227,14 +227,14 @@ def check_ip():
 
 def main():
     print(u"┌──────────────────────────────────────────────────┐")
-    print(u"  Click'n'Load2RSScrawler von RiX")
-    print(u"  https://github.com/rix1337/ClickNLoad2RSScrawler")
+    print(u"  Click'n'Load2FeedCrawler von RiX")
+    print(u"  https://github.com/rix1337/ClickNLoad2FeedCrawler")
     print(u"└──────────────────────────────────────────────────┘")
     local_address = 'http://' + check_ip() + ':' + str(9666)
     print(u"Click'n'Load ist verfügbar unter " + local_address)
-    arguments = docopt(__doc__, version='RSScrawler')
-    rsscrawler_url = "http://" + arguments['--url'].replace("http://", "")
-    if not rsscrawler_url:
+    arguments = docopt(__doc__, version='FeedCrawler')
+    feedcrawler_url = "http://" + arguments['--url'].replace("http://", "")
+    if not feedcrawler_url:
         print(u'Bitte mit --url=<RSSCRAWLER_URL> starten!')
         time.sleep(10)
         sys.exit(1)
