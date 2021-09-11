@@ -7,7 +7,7 @@ on:
 
 jobs:
   release:
-    name: Build Linux wheel
+    name: Release Artifacts
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -54,3 +54,5 @@ jobs:
       - name: Upload to PyPI
         run: |
           python -m twine upload ./dist/* -u __token__ -p ${{ secrets.PYPI_TOKEN }}
+
+
