@@ -48,8 +48,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/cnl2rsscrawler-${{ steps.version.outputs.version }}-py3-none-any.whl
-          asset_name: cnl2rsscrawler-${{ steps.version.outputs.version }}-py3-none-any.whl
+          asset_path: ./dist/cnl2feedcrawler-${{ steps.version.outputs.version }}-py3-none-any.whl
+          asset_name: cnl2feedcrawler-${{ steps.version.outputs.version }}-py3-none-any.whl
           asset_content_type: application/octet-stream
       - name: Upload to PyPI
         run: |
