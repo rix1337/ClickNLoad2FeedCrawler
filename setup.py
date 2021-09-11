@@ -17,7 +17,7 @@ with open('requirements.txt') as f:
 
 setuptools.setup(
     name="cnl2feedcrawler",
-    version="1.1.0",
+    version="2.0.0",
     author="rix1337",
     author_email="",
     description="Intercept, decrypt and forward CnL to FeedCrawler",

@@ -1,5 +1,0 @@
-# -*- coding: utf-8 -*-
-# ClickNLoad2FeedCrawler
-# Projekt von https://github.com/rix1337
-
-docopt

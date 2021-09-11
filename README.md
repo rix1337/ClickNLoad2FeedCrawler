@@ -7,11 +7,11 @@ Click'n'Load2FeedCrawler fängt Click'n'Load ab, entschlüsselt die Payload und 
 
 ####  Voraussetzungen
 * Linux basierte Laufzeitumgebung (inkompatibel mit Windows)
-* [Python 3.9](https://www.python.org/downloads/) oder neuer
+* [Python 3.6](https://www.python.org/downloads/) oder neuer
 * [pip](https://pip.pypa.io/en/stable/installing/)
 * [openssl](https://www.openssl.org/)
 * [Node.js](https://nodejs.org/)
-* [FeedCrawler 8](https://github.com/rix1337/FeedCrawler) oder neuer
+* [FeedCrawler](https://github.com/rix1337/FeedCrawler)
 
 #### Update
 
@@ -24,9 +24,9 @@ Click'n'Load2FeedCrawler fängt Click'n'Load ab, entschlüsselt die Payload und 
 
 #### Pflichtparameter
 
-| Parameter | Erläuterung |
-|---|---|
-| ```--url=<URL>``` | Die lokale URL des FeedCrawlers - bspw. `192.168.1.1:9090`)
+| Parameter         | Erläuterung                                                        |
+|-------------------|--------------------------------------------------------------------|
+| ```--url=<URL>``` | Die lokale URL des FeedCrawlers - bspw. `http://192.168.1.1:9090`) |
 
 ***
 
