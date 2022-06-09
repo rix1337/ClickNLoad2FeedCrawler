@@ -14,18 +14,20 @@ Options:
   --url=<URL>    Your FeedCrawler's base URL
 """
 
+import argparse
 import base64
 import cgi
 import fnmatch
 import http.server
+import json
 import socket
 import subprocess
 import sys
-import time
 from io import StringIO
 
-import requests
-from docopt import docopt
+from cnl2feedcrawler.http_requests.request_handler import request
+
+feedcrawler_url = ""
 
 
 class URLMap:
@@ -147,6 +149,8 @@ def encode_base64(value):
 
 
 def format_package(name, urls, passwords=None):
+    global feedcrawler_url
+
     name = name.strip()
     if "/" in name:
         name = name.replace("/", "")
@@ -157,16 +161,16 @@ def format_package(name, urls, passwords=None):
 
     buf = StringIO()
 
-    # Load FeedCrawler base URL
-    arguments = docopt(__doc__, version='FeedCrawler')
-    feedcrawler_url = "http://" + arguments['--url'].replace("http://", "")
-
     # Create and send FeedCrawler Payload
-    print("[FeedCrawler Sponsors Helper Click'n'Load erfolgreich] - " + name)
     links = str(urls).replace(" ", "")
-    crawler = feedcrawler_url + '/sponsors_helper/to_download/'
+    crawler = feedcrawler_url + 'sponsors_helper/to_download/'
     payload = encode_base64(links + '|' + name + '|' + str(passwords))
-    requests.get(crawler + payload)
+    sent = request(crawler + payload)
+    if sent and sent.status_code == 200:
+        print("[Click'n'Load erfolgreich] - " + name)
+    else:
+        print("[Click'n'Load fehlgeschlagen] - " + name)
+        return ""
 
     return buf.getvalue()
 
@@ -226,19 +230,59 @@ def check_ip():
 
 
 def main():
+    global feedcrawler_url
+
     print(u"┌──────────────────────────────────────────────────┐")
     print(u"  Click'n'Load2FeedCrawler von RiX")
     print(u"  https://github.com/rix1337/ClickNLoad2FeedCrawler")
     print(u"└──────────────────────────────────────────────────┘")
     local_address = 'http://' + check_ip() + ':' + str(9666)
-    print(u"Click'n'Load ist verfügbar unter " + local_address)
-    arguments = docopt(__doc__, version='FeedCrawler')
-    feedcrawler_url = "http://" + arguments['--url'].replace("http://", "")
-    if not feedcrawler_url:
-        print(u'Bitte mit --url=<RSSCRAWLER_URL> starten!')
-        time.sleep(10)
+
+    # Test if NodeJS is available
+    try:
+        node_version = call(["node", "-v"])
+    except FileNotFoundError:
+        print("NodeJS ist nicht verfügbar!")
         sys.exit(1)
+    node_version = node_version.replace("\n", "").replace("v", "").strip()
+    print("Nutze NodeJS " + node_version + " zum Parsen von JavaScript")
+
+    # Test if OpenSSL is available
+    try:
+        openssl_version = call(["openssl", "version"])
+    except FileNotFoundError:
+        print("OpenSSL ist nicht verfügbar!")
+        sys.exit(1)
+    openssl_version = openssl_version.replace("\n", "").replace("v", "").replace("OpenSSL", "").strip()
+    if " (" in openssl_version:
+        openssl_version = openssl_version.split(" (")[0]
+    print("Nutze OpenSSL " + openssl_version + " zum Entschlüsseln der Links")
+
+    # Test if FeedCrawler is available
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--url", required=True, help="URL des FeedCrawlers wird benötigt, um zu Starten!")
+    arguments = parser.parse_args()
+    url = arguments.url.replace("http://", "").replace("https://", "")
+    if url.endswith("/"):
+        url = url[:-1]
+    feedcrawler_url = "http://" + url + "/"
+    try:
+        feedcrawler_version = request(feedcrawler_url + "api/version/")
+    except:
+        print(u"Fehler beim Verbinden mit " + feedcrawler_url + "!")
+        sys.exit(1)
+    if feedcrawler_version.status_code == 200:
+        try:
+            feedcrawler_version = json.loads(feedcrawler_version.text)["version"]["ver"].replace("v.", "").strip()
+            print(u"Nutze FeedCrawler " + feedcrawler_version + " zur Übergabe der Links an My JDownloader")
+        except:
+            pass
+    if not feedcrawler_version:
+        print(u"FeedCrawler Version nicht ermittelbar!")
+        sys.exit(1)
+
     httpd = http.server.HTTPServer(("0.0.0.0", 9666), CNLHandler)
+    print(u"Click'n'Load ist verfügbar unter http://127.0.0.1:9666 und " + local_address)
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
