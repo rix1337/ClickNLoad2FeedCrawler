@@ -14,14 +14,14 @@ except:
 
 setuptools.setup(
     name="cnl2feedcrawler",
-    version="2.0.0",
+    version="2.0.1",
     author="rix1337",
     author_email="",
     description="Intercept, decrypt and forward CnL to FeedCrawler",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/rix1337/ClickNLoad2FeedCrawler",
-    packages=["cnl2feedcrawler"],
+    packages=setuptools.find_packages(),
     include_package_data=True,
     zip_safe=False,
     classifiers=[
