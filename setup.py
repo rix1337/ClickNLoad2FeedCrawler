@@ -12,9 +12,6 @@ except:
 
     long_description = io.open('README.md', encoding='utf-8').read()
 
-with open('requirements.txt') as f:
-    required = f.read().splitlines()
-
 setuptools.setup(
     name="cnl2feedcrawler",
     version="2.0.0",
@@ -26,7 +23,6 @@ setuptools.setup(
     url="https://github.com/rix1337/ClickNLoad2FeedCrawler",
     packages=["cnl2feedcrawler"],
     include_package_data=True,
-    install_requires=required,
     zip_safe=False,
     classifiers=[
         "Programming Language :: Python :: 3",
