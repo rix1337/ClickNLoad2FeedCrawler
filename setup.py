@@ -14,7 +14,7 @@ except:
 
 setuptools.setup(
     name="cnl2feedcrawler",
-    version="2.0.1",
+    version="2.0.2",
     author="rix1337",
     author_email="",
     description="Intercept, decrypt and forward CnL to FeedCrawler",
