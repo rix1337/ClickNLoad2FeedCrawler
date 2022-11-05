@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 # ClickNLoad2FeedCrawler
-# Projekt von https://github.com/rix1337
+# Projekt by https://github.com/rix1337
 
 import setuptools
+
+from cnl2feedcrawler.providers.version import get_version
 
 try:
     with open('README.md', encoding='utf-8') as f:
@@ -14,7 +16,7 @@ except:
 
 setuptools.setup(
     name="cnl2feedcrawler",
-    version="2.0.2",
+    version=get_version(),
     author="rix1337",
     author_email="",
     description="Intercept, decrypt and forward CnL to FeedCrawler",
@@ -31,7 +33,7 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'cnl2feedcrawler = cnl2feedcrawler.cnl2feedcrawler:main',
+            'cnl2feedcrawler = cnl2feedcrawler.run:main',
         ],
     },
 )

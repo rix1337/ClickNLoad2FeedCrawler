@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # ClickNLoad2FeedCrawler
-# Projekt von https://github.com/rix1337
+# Projekt by https://github.com/rix1337
 #
 # Enthält Code von https://github.com/drwilly/clicknload2text
 # Lizenz: https://github.com/drwilly/clicknload2text/blob/master/LICENSE
@@ -25,7 +25,8 @@ import subprocess
 import sys
 from io import StringIO
 
-from cnl2feedcrawler.http_requests.request_handler import request
+from cnl2feedcrawler.providers.http_requests.request_handler import request
+from cnl2feedcrawler.providers.version import get_version
 
 feedcrawler_url = ""
 
@@ -232,10 +233,10 @@ def check_ip():
 def main():
     global feedcrawler_url
 
-    print(u"┌──────────────────────────────────────────────────┐")
-    print(u"  Click'n'Load2FeedCrawler von RiX")
-    print(u"  https://github.com/rix1337/ClickNLoad2FeedCrawler")
-    print(u"└──────────────────────────────────────────────────┘")
+    print("┌──────────────────────────────────────────────────┐")
+    print(f"  Click'n'Load2FeedCrawler v.{get_version()} von RiX")
+    print("  https://github.com/rix1337/ClickNLoad2FeedCrawler")
+    print("└──────────────────────────────────────────────────┘")
     local_address = 'http://' + check_ip() + ':' + str(9666)
 
     # Test if NodeJS is available
@@ -269,20 +270,20 @@ def main():
     try:
         feedcrawler_version = request(feedcrawler_url + "api/version/")
     except:
-        print(u"Fehler beim Verbinden mit " + feedcrawler_url + "!")
+        print("Fehler beim Verbinden mit " + feedcrawler_url + "!")
         sys.exit(1)
     if feedcrawler_version.status_code == 200:
         try:
             feedcrawler_version = json.loads(feedcrawler_version.text)["version"]["ver"].replace("v.", "").strip()
-            print(u"Nutze FeedCrawler " + feedcrawler_version + " zur Übergabe der Links an My JDownloader")
+            print("Nutze FeedCrawler " + feedcrawler_version + " zur Übergabe der Links an My JDownloader")
         except:
             pass
     if not feedcrawler_version:
-        print(u"FeedCrawler Version nicht ermittelbar!")
+        print("FeedCrawler Version nicht ermittelbar!")
         sys.exit(1)
 
     httpd = http.server.HTTPServer(("0.0.0.0", 9666), CNLHandler)
-    print(u"Click'n'Load ist verfügbar unter http://127.0.0.1:9666 und " + local_address)
+    print("Click'n'Load ist verfügbar unter http://127.0.0.1:9666 und " + local_address)
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
