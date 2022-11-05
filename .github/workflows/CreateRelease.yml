@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install requirements
         run: |
           pip install wheel
@@ -22,28 +22,21 @@ jobs:
       - name: Get Version
         run: |
           version=$(grep -Po 'version="(.+?)"' setup.py) && version="${version:9}" && version="${version::-1}"        
-          echo "::set-output name=version::$version"
+          run: echo "version=$version" >>$GITHUB_OUTPUT
         id: version
       - name: Create Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+        uses: softprops/action-gh-release@v1
         id: create_release
         with:
           draft: false
           prerelease: false
-          release_name: v.${{ steps.version.outputs.version }}
+          name: v.${{ steps.version.outputs.version }}
           tag_name: v.${{ steps.version.outputs.version }}
           body_path: .github/Changelog.md
-      - name: Upload Linux Wheel
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/cnl2feedcrawler-${{ steps.version.outputs.version }}-py3-none-any.whl
-          asset_name: cnl2feedcrawler-${{ steps.version.outputs.version }}-py3-none-any.whl
-          asset_content_type: application/octet-stream
+          files: |
+            ./artifact-wheel/cnl2feedcrawler-${{ steps.version.outputs.version }}-py3-none-any.whl
+            ./artifact-exe/cnl2feedcrawler-${{ steps.version.outputs.version }}-standalone-win64.exe
+          fail_on_unmatched_files: true
       - name: Upload to PyPI
         run: |
           python -m twine upload ./dist/* -u __token__ -p ${{ secrets.PYPI_TOKEN }}
