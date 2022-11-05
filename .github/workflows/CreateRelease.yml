@@ -33,8 +33,7 @@ jobs:
           tag_name: v.${{ steps.version.outputs.version }}
           body_path: .github/Changelog.md
           files: |
-            ./artifact-wheel/cnl2feedcrawler-${{ steps.version.outputs.version }}-py3-none-any.whl
-            ./artifact-exe/cnl2feedcrawler-${{ steps.version.outputs.version }}-standalone-win64.exe
+            ./dist/cnl2feedcrawler-${{ steps.version.outputs.version }}-py3-none-any.whl
           fail_on_unmatched_files: true
       - name: Upload to PyPI
         run: |
