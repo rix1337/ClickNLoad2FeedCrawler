@@ -2,7 +2,9 @@
 # ClickNLoad2FeedCrawler
 # Projekt by https://github.com/rix1337
 
-from cnl2feedcrawler import run
+def get_version():
+    return "2.1.0"
+
 
 if __name__ == '__main__':
-    run.main()
+    print(get_version())
