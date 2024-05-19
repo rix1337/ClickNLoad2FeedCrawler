@@ -53,7 +53,7 @@ class output:
 
 
 class CNLHandler(http.server.BaseHTTPRequestHandler):
-    http.server.BaseHTTPRequestHandler.server_version = "Click'n'Load2FeedCrawler"
+    http.server.BaseHTTPRequestHandler.server_version = "ClickNLoad2FeedCrawler"
     http.server.BaseHTTPRequestHandler.sys_version = ""
 
     def __init__(self, request, client_address, server):
@@ -234,7 +234,7 @@ def main():
     global feedcrawler_url
 
     print("┌──────────────────────────────────────────────────┐")
-    print(f"  Click'n'Load2FeedCrawler v.{get_version()} von RiX")
+    print(f"  ClickNLoad2FeedCrawler v.{get_version()} von RiX")
     print("  https://github.com/rix1337/ClickNLoad2FeedCrawler")
     print("└──────────────────────────────────────────────────┘")
     local_address = 'http://' + check_ip() + ':' + str(9666)

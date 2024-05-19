@@ -1,0 +1,3 @@
+#!/usr/bin/with-contenv bash
+
+exec cnl2feedcrawler --url=$URL

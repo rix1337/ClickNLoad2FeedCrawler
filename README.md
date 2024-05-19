@@ -1,5 +1,5 @@
-# Click'n'Load2FeedCrawler
-Click'n'Load2FeedCrawler fängt Click'n'Load ab, entschlüsselt die Payload und übergibt diese dem FeedCrawler.
+# ClickNLoad2FeedCrawler
+ClickNLoad2FeedCrawler fängt Click'n'Load ab, entschlüsselt die Payload und übergibt diese dem FeedCrawler.
 
 [![PyPI version](https://badge.fury.io/py/cnl2feedcrawler.svg)](https://badge.fury.io/py/cnl2feedcrawler)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/cnl2feedcrawler)](https://img.shields.io/pypi/dm/cnl2feedcrawler)
@@ -21,6 +21,15 @@ Click'n'Load2FeedCrawler fängt Click'n'Load ab, entschlüsselt die Payload und 
 
 ```cnl2feedcrawler --url=192.168.1.1:9090``` in der Konsole (Python muss im System-PATH hinterlegt sein)
 
+# Docker
+```
+docker run -d \
+  --name="Python-Template" \
+  -p 9666:9666 \
+  -e 'URL'='192.168.1.1:9090'
+  rix1337/docker-rix-template:latest
+  ```
+
 
 #### Pflichtparameter
 
@@ -28,7 +37,16 @@ Click'n'Load2FeedCrawler fängt Click'n'Load ab, entschlüsselt die Payload und 
 |-------------------|--------------------------------------------------------------------|
 | ```--url=<URL>``` | Die lokale URL des FeedCrawlers - bspw. `http://192.168.1.1:9090`) |
 
-***
+
+
+## Click'n'Load auf Windows umleiten
+
+`netsh interface portproxy add v4tov4 listenport=9666 connectaddress=<Docker Host> connectport=9666 listenaddress=127.0.0.1`
+
+#### Umleitung entfernen:
+
+`netsh interface portproxy delete v4tov4 listenport=9666 listenaddress=127.0.0.1`
+
 
 ## Credits
 
