@@ -24,10 +24,10 @@ ClickNLoad2FeedCrawler fängt Click'n'Load ab, entschlüsselt die Payload und ü
 # Docker
 ```
 docker run -d \
-  --name="Python-Template" \
+  --name="ClickNLoad2FeedCrawler" \
   -p 9666:9666 \
   -e 'URL'='192.168.1.1:9090'
-  rix1337/docker-rix-template:latest
+  rix1337/docker-cnl2feedcrawler:latest
   ```
 
 

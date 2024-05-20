@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # FeedCrawler
-# Projekt by https://github.com/rix1337
+# Project by https://github.com/rix1337
 #
 # Dieses Modul realisiert HTTP-Requests auf Basis der Python-eigenen urllib-Bibliothek
 #

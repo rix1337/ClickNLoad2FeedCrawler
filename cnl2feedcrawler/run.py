@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # ClickNLoad2FeedCrawler
-# Projekt by https://github.com/rix1337
+# Project by https://github.com/rix1337
 #
 # Enthält Code von https://github.com/drwilly/clicknload2text
 # Lizenz: https://github.com/drwilly/clicknload2text/blob/master/LICENSE
