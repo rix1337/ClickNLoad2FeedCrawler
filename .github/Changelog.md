@@ -1,3 +1,5 @@
-### Installation und Update:
+### Install / Update:
 
-`pip install -U  cnl2feedcrawler`
+`pip install -U cnl2feedcrawler`
+
+### Changelog:
