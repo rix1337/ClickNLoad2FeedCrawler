@@ -5,7 +5,7 @@ MAINTAINER rix1337
 ARG PACKAGE_NAME=cnl2feedcrawler
 
 # build tools
-RUN apk add --no-cache build-base jq python3-dev py3-pip
+RUN apk add --no-cache build-base jq python3-dev py3-pip nodejs openssl
 
 # Optionally set desired version for the build
 ARG VS="false"
