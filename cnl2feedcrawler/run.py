@@ -264,8 +264,15 @@ def main():
     parser.add_argument("--url", required=True, help="URL des FeedCrawlers wird benötigt, um zu Starten!")
     arguments = parser.parse_args()
     url = arguments.url.replace("http://", "").replace("https://", "")
+
     if url.endswith("/"):
         url = url[:-1]
+    if not url.strip():
+        print("FeedCrawler URL nicht angegeben!")
+        sys.exit(1)
+    else:
+        print("Verbinde mit FeedCrawler unter " + url)
+
     feedcrawler_url = "http://" + url + "/"
     try:
         feedcrawler_version = request(feedcrawler_url + "api/version/")
