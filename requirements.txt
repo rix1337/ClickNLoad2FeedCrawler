@@ -1,0 +1,2 @@
+dukpy==0.4.0
+pycryptodomex==3.20.0

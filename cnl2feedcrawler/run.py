@@ -21,9 +21,11 @@ import fnmatch
 import http.server
 import json
 import socket
-import subprocess
 import sys
 from io import StringIO
+
+import dukpy
+from Cryptodome.Cipher import AES
 
 from cnl2feedcrawler.providers.http_requests.request_handler import request
 from cnl2feedcrawler.providers.version import get_version
@@ -176,46 +178,40 @@ def format_package(name, urls, passwords=None):
     return buf.getvalue()
 
 
-def call(cmd, input=None):
-    p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-    if input is not None:
-        p.stdin.write(input.encode())
-    p.stdin.close()
-    with p.stdout:
-        return p.stdout.read().decode()
-
-
-def aes_encrypt(data, key):
-    """
-    data	- base64 encoded input
-    key	- hex encoded password
-    """
-    enc_cmd = ["openssl", "enc", "-e", "-AES-128-CBC", "-nosalt", "-base64", "-A", "-K", key, "-iv", key]
-    return call(enc_cmd, data).strip()
-
-
 def aes_decrypt(data, key):
-    """
-    data	- base64 encoded input
-    key	- hex encoded password
-    """
-    dec_cmd = ["openssl", "enc", "-d", "-AES-128-CBC", "-nosalt", "-base64", "-A", "-K", key, "-iv", key, "-nopad"]
-    return call(dec_cmd, data).strip()
+    try:
+        encrypted_data = base64.b64decode(data)
+    except Exception as e:
+        raise ValueError("Failed to decode base64 data") from e
+
+    try:
+        key_bytes = bytes.fromhex(key)
+    except Exception as e:
+        raise ValueError("Failed to convert key to bytes") from e
+
+    iv = key_bytes
+    cipher = AES.new(key_bytes, AES.MODE_CBC, iv)
+
+    try:
+        decrypted_data = cipher.decrypt(encrypted_data)
+    except ValueError as e:
+        raise ValueError("Decryption failed") from e
+
+    try:
+        return decrypted_data.decode('utf-8').replace('\x00', '').replace('\x08', '')
+    except UnicodeDecodeError as e:
+        raise ValueError("Failed to decode decrypted data") from e
 
 
 def jk_eval(f_def):
+    js_code = f"""
+    {f_def}
+    f();
     """
-    f_def	- JavaScript code that defines a function f -> String
-    """
-    f_call = """
-		if(typeof console !== 'undefined') {
-			console.log(f());
-		} else {
-			print(f());
-		}
-	"""
-    js_cmd = ["node"]
-    return call(js_cmd, ';'.join((f_def, f_call))).strip()
+
+    result = dukpy.evaljs(js_code).strip()
+
+    return result
 
 
 def check_ip():
@@ -238,26 +234,6 @@ def main():
     print("  https://github.com/rix1337/ClickNLoad2FeedCrawler")
     print("└──────────────────────────────────────────────────┘")
     local_address = 'http://' + check_ip() + ':' + str(9666)
-
-    # Test if NodeJS is available
-    try:
-        node_version = call(["node", "-v"])
-    except FileNotFoundError:
-        print("NodeJS ist nicht verfügbar!")
-        sys.exit(1)
-    node_version = node_version.replace("\n", "").replace("v", "").strip()
-    print("Nutze NodeJS " + node_version + " zum Parsen von JavaScript")
-
-    # Test if OpenSSL is available
-    try:
-        openssl_version = call(["openssl", "version"])
-    except FileNotFoundError:
-        print("OpenSSL ist nicht verfügbar!")
-        sys.exit(1)
-    openssl_version = openssl_version.replace("\n", "").replace("v", "").replace("OpenSSL", "").strip()
-    if " (" in openssl_version:
-        openssl_version = openssl_version.split(" (")[0]
-    print("Nutze OpenSSL " + openssl_version + " zum Entschlüsseln der Links")
 
     # Test if FeedCrawler is available
     parser = argparse.ArgumentParser()
